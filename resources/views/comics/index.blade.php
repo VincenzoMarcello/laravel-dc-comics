@@ -6,8 +6,8 @@
     <div class="row g-5">
       @forelse ($comics as $comic)
         <div class="col-4">
-          <div class="card">
-            <div class="card-header">
+          <div class="card text-center">
+            <div class="card-header ">
               <img src="{{ $comic->thumb }}">
             </div>
             <div class="card-body">
@@ -15,6 +15,7 @@
               <p>{{ $comic->series }}</p>
               <p>{{ $comic->type }}</p>
               <p>{{ $comic->price }}</p>
+              <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">Mostra dettagli</a>
             </div>
           </div>
         </div>
