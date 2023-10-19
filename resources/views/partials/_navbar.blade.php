@@ -12,7 +12,7 @@
             aria-current="page">Home<span class="visually-hidden">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('comic.index') }}">Comics</a>
+          <a class="nav-link" href="{{ route('comics.index') }}">Comics</a>
         </li>
     </div>
   </div>

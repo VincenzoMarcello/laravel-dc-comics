@@ -2,6 +2,25 @@
 
 @section('main-content')
   <section class="container mt-5">
-    <h1>COMICS</h1>
+    <h1>Lista Comics</h1>
+    <div class="row g-5">
+      @forelse ($comics as $comic)
+        <div class="col-4">
+          <div class="card">
+            <div class="card-header">
+              <img src="{{ $comic->thumb }}">
+            </div>
+            <div class="card-body">
+              <p>{{ $comic->title }}</p>
+              <p>{{ $comic->series }}</p>
+              <p>{{ $comic->type }}</p>
+              <p>{{ $comic->price }}</p>
+            </div>
+          </div>
+        </div>
+      @empty
+        <h1>Non ci sono Comics</h1>
+      @endforelse
+    </div>
   </section>
 @endsection
