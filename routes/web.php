@@ -3,6 +3,7 @@
 use App\Http\Controllers\PageController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+
+// # PER IL CONTROLLER NORMALE STATICO SI FA IL GET
+// Route::get('/comic', [ComicController::class, 'index'])->name('comic.index');
+
+// # PER LE CRUD E QUINDI IL CONTROLLER RESOURCE SI FA IL RESOURCE APPUNTO
+Route::resource('comics', ComicController::class);
