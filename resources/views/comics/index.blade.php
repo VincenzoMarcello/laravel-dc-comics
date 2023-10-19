@@ -3,6 +3,7 @@
 @section('main-content')
   <section class="container mt-5">
     <h1>Lista Comics</h1>
+    <a class="btn btn-success mb-3" href="{{ route('comics.create') }}">Aggiungi Comic</a>
     <div class="row g-5">
       @forelse ($comics as $comic)
         <div class="col-4">
