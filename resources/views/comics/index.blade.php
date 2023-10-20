@@ -4,6 +4,7 @@
   <section class="container mt-5">
     <h1>Lista Comics</h1>
     <a class="btn btn-success mb-3" href="{{ route('comics.create') }}">Aggiungi Comic</a>
+
     <div class="row g-5">
       @forelse ($comics as $comic)
         <div class="col-4">
@@ -16,7 +17,8 @@
               <p>{{ $comic->series }}</p>
               <p>{{ $comic->type }}</p>
               <p>{{ $comic->price }}</p>
-              <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">Mostra dettagli</a>
+              <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">Dettagli</a>
+              <a class="btn btn-success" href="{{ route('comics.edit', $comic) }}">Modifica</a>
             </div>
           </div>
         </div>
