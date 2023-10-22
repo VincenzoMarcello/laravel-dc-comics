@@ -41,7 +41,11 @@ class ComicController extends Controller
         $comic->fill($data);
         $comic->save();
 
-        return redirect()->route('comics.show', $comic);
+        return redirect()->route('comics.show', $comic)
+            //! QUI VOGLIAMO DARE ALL'ALERT CHE COMPARIRA' IL COLORE VERDE DEL success
+            // ! E IL MESSAGGIO 'Comic creato con successo'
+            ->with('message_type', 'success')
+            ->with('message', 'Comic creato con successo');
 
     }
 
@@ -78,17 +82,33 @@ class ComicController extends Controller
     {
         $data = $request->all();
         $comic->update($data);
-        return redirect()->route('comics.show', $comic);
+        return redirect()->route('comics.show', $comic)
+
+            //! QUI VOGLIAMO DARE ALL'ALERT CHE COMPARIRA' IL COLORE BLU DELL'INFO 
+            // ! E IL MESSAGGIO 'Comic modificato con successo'
+            ->with('message_type', 'info')
+            ->with('message', 'Comic modificato con successo');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+        return redirect()
+            ->route('comics.index')
+            // ! QUESTI MESSAGGI FLASH SONO VARIABILI DI SESSIONE CHE DURANO IL
+            // ! TEMPO DI UN CARICAMENTO POI SCOMPAIONO
+            // ! STIAMO RENDENDO DINAMICA LA CLASSE CON LA VARIABILE
+            // ! message_type(NOME SCELTO DA NOI) E DANDO DOPO LA VIRGOLA LA CLASSE
+            // ! DESIDERATA CHE VOGLIAMO DARE ALL'ALERT CHE COMPARIRA' IN QUESTO CASO
+            // ! ROSSO QUINDI DANGER
+
+            ->with('message_type', 'danger')
+            ->with('message', 'Comic eliminato con successo');
     }
 }

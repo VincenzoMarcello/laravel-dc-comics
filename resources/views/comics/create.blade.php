@@ -18,7 +18,7 @@
 
         <div class="col-6">
           <label for="price" class="form-label mt-4">Prezzo</label>
-          <input class="form-control" type="number" id="price" name="price">
+          <input class="form-control" type="text" id="price" name="price">
         </div>
 
         <div class="col-6">
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-
+      {{-- ! RICORDA CHE IL BUTTON DELL'INVIO DEL FORM NON DEVE ESSERE MAI TYPE BUTTON --}}
       <button class="btn btn-success mt-5">Salva Comic</button>
     </form>
   </div>
