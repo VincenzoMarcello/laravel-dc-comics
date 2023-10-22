@@ -1,8 +1,11 @@
 <?php
 
+// # QUI IMPORTIAMO IL CONTROLLER STATICO
 use App\Http\Controllers\PageController;
 
 use Illuminate\Support\Facades\Route;
+
+// # QUI IMPORTIAMO IL RESOURCE CONTROLLER
 use App\Http\Controllers\ComicController;
 
 /*
@@ -18,8 +21,8 @@ use App\Http\Controllers\ComicController;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
-// # PER IL CONTROLLER NORMALE STATICO SI FA IL GET
+// # PER IL CONTROLLER NORMALE STATICO SI FA IL GET COME QUELLO SOPRA
 // Route::get('/comic', [ComicController::class, 'index'])->name('comic.index');
 
-// # PER LE CRUD E QUINDI IL CONTROLLER RESOURCE SI FA IL RESOURCE APPUNTO
+// # PER LE CRUD SI FA IL RESOURCE CONTROLLER QUESTA ISTRUZIONE SOTTO GESTIRA' TUTTE LE CRUD
 Route::resource('comics', ComicController::class);
