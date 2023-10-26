@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Comic;
 use Illuminate\Http\Request;
 
+// # IMPORTO IL VALIDATOR 
+use Illuminate\Support\Facades\Validator;
+
 class ComicController extends Controller
 {
     /**
@@ -36,7 +39,10 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // # SENZA VALIDAZIONE
+        // $data = $request->all();
+        // # CON VALIDAZIONE
+        $data = $this->validation($request->all());
         $comic = new Comic();
         $comic->fill($data);
         $comic->save();
@@ -80,7 +86,11 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        $data = $request->all();
+        // # SENZA VALIDAZIONE
+        // $data = $request->all();
+
+        // # CON VALIDAZIONE
+        $data = $this->validation($request->all(), $comic->id);
         $comic->update($data);
         return redirect()->route('comics.show', $comic)
 
@@ -111,4 +121,47 @@ class ComicController extends Controller
             ->with('message_type', 'danger')
             ->with('message', 'Comic eliminato con successo');
     }
+
+    private function validation($data)
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'title' => 'required|string|max:20',
+                "description" => "required|string",
+                "thumb" => "required|string",
+                "price" => "required|string",
+                "series" => "required|string",
+                "sale_date" => "required|date",
+                "type" => "required|string"
+
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.string' => 'Il titolo deve essere una stringa',
+                'title.max' => 'Il titolo deve massimo di 20 caratteri',
+
+                'description.required' => 'La descrizione è obbligatorio',
+                'description.string' => 'La descrizione deve essere una stringa',
+
+                'thumb.required' => 'La thumbnail è obbligatorio',
+                'thumb.string' => 'La thumbnail deve essere una stringa',
+
+                'price.required' => 'Il prezzo è obbligatorio',
+                'price.string' => 'Il prezzo deve essere una stringa',
+
+                'series.required' => 'La serie è obbligatorio',
+                'series.string' => 'La serie deve essere una stringa',
+
+                'sale_date.required' => 'La data di vendita è obbligatorio',
+                'sale_date.date' => 'La data di vendita deve essere una data',
+
+                'type.required' => 'Il tipo è obbligatorio',
+                'type.string' => 'Il tipo deve essere una stringa',
+            ]
+        )->validate();
+
+        return $validator;
+    }
 }
+
